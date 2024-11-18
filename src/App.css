@@ -1,38 +1,191 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    animation: gradient-flow 6s ease infinite alternate;
+    overflow: hidden;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  @keyframes gradient-flow {
+    0% {
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    }
+    100% {
+      background: linear-gradient(135deg, #a6c1ee, #fbc2eb);
+    }
   }
-  to {
-    transform: rotate(360deg);
+  
+  /* Game Container */
+  .game {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    animation: pop-in 0.8s ease-out;
   }
-}
+  
+  @keyframes pop-in {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Title with Decorative Stars */
+  h1 {
+    font-size: 2.8rem;
+    color: #eb609a;
+    margin-bottom: 20px;
+    position: relative;
+    /* animation: shine 3s ease-in-out infinite; */
+  }
+  
+  h1::before,
+  h1::after {
+    content: '⭐';
+    font-size: 1.5rem;
+    position: absolute;
+    animation: sparkle 2s infinite alternate;
+  }
+  
+  h1::before {
+    left: -40px;
+    top: 0;
+  }
+  
+  h1::after {
+    right: -40px;
+    top: 0;
+  }
+  
+  @keyframes sparkle {
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+  
+  @keyframes shine {
+    0% {
+      text-shadow: 0 0 5px #ff7eb3, 0 0 10px #ff85a1;
+    }
+    100% {
+      text-shadow: 0 0 20px #ff7eb3, 0 0 30px #ff85a1;
+    }
+  }
+  
+  /* Current Player Indicator */
+  .player-indicator h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .player-indicator h2 span {
+    font-weight: bold;
+    color: #ff7eb3; /* Player 1 */
+  }
+  
+  .player-indicator h2 span.player2 {
+    color: #85d8ce; /* Player 2 */
+  }
+  
+  /* Board Styling */
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    gap: 15px;
+    margin: 0 auto;
+  }
+  
+  /* Cute Cells */
+  .cell {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #fdfbfb, #f8f9fa);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff7eb3;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  }
+  
+  .cell:hover {
+    transform: scale(1.1);
+    background: linear-gradient(145deg, #ffe6f3, #fdfbfb);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cell.taken {
+    pointer-events: none;
+    background: #ffe6f3;
+    color: rgba(255, 126, 179, 0.6);
+  }
+  
+  /* Winner Message */
+  .winner {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffa500;
+    margin-top: 20px;
+    animation: glow 1.5s infinite alternate ease-in-out;
+  }
+  
+  @keyframes glow {
+    0% {
+      text-shadow: 0 0 5px #ffa500, 0 0 10px #ffd700;
+    }
+    100% {
+      text-shadow: 0 0 15px #ffa500, 0 0 25px #ffd700;
+    }
+  }
+  
+  /* Restart Button */
+  button {
+    margin-top: 30px;
+    padding: 12px 28px;
+    font-size: 1.2rem;
+    color: white;
+    background: linear-gradient(135deg, #ff7eb3, #85d8ce);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #85d8ce, #ff7eb3);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Player-Specific Styles */
+  .cell.x {
+    color: #ff7eb3; /* Pink for Player 1 */
+  }
+  
+  .cell.o {
+    color: #85d8ce; /* Mint for Player 2 */
+  }
+  
