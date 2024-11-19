@@ -19,7 +19,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
+      "tic-tac-toe name",
       "react-app/jest"
     ]
   },
