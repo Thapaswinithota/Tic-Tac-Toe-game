@@ -19,7 +19,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "tic-tac-toe name",
+      "tic-tac-toe game",
       "react-app/jest"
     ]
   },
